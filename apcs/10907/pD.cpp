@@ -39,9 +39,11 @@ int main() {
         int u, v;
         cin >> u >> v;
         u--, v--;
-        G[u].push_back(v);
-        G[v].push_back(u);
-        cin >> strs[i];
+        if (u != v){
+            G[u].push_back(v);
+            G[v].push_back(u);
+        }
+        cin >> strs[u];
     }
     int ans = 0;
     c.resize(n);
