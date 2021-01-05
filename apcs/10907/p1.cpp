@@ -30,5 +30,5 @@ int main() {
     for (int cs = 1; cs <= T; cs++) {
         ans += solve(a, b);
     }
-    cout << ans;
+    cout << ans << '\n';
 }

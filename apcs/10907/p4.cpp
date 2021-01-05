@@ -1,3 +1,4 @@
+// Copyright (C) Algo Seacow. 2020. All Rights Reserved.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -39,11 +40,9 @@ int main() {
         int u, v;
         cin >> u >> v;
         u--, v--;
-        if (u != v){
-            G[u].push_back(v);
-            G[v].push_back(u);
-        }
-        cin >> strs[u];
+        G[u].push_back(v);
+        G[v].push_back(u);
+        cin >> strs[i];
     }
     int ans = 0;
     c.resize(n);
