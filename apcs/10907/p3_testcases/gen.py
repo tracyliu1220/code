@@ -23,7 +23,7 @@ def task1():
     print(*b)
 
 def task2_0():
-    n, m = 200000 - randint(0, 100), 200000 - randint(0, 100)
+    n, m = 200000 - randint(0, 100), 20000 - randint(0, 100)
     print(n, m)
     a = [randint(1, 5000) for i in range(n)]
     print(*a)
@@ -35,7 +35,7 @@ def task2_0():
     print(*b)
 
 def task2_1():
-    n, m = 200000 - randint(0, 100), 200000 - randint(0, 100)
+    n, m = 200000 - randint(0, 100), 20000 - randint(0, 100)
     print(n, m)
     a = [randint(1, 500) for i in range(n)]
     print(*a)
@@ -47,7 +47,7 @@ def task2_1():
     print(*b)
 
 def task2():
-    n, m = 200000 - randint(0, 100), 200000 - randint(0, 100)
+    n, m = 200000 - randint(0, 100), 20000 - randint(0, 100)
     print(n, m)
     a = [randint(1, 3) for i in range(n)]
     print(*a)
@@ -57,4 +57,4 @@ def task2():
     b = [randint(1, s) for i in range(m)]
     print(*b)
 
-task2_1()
+task2()

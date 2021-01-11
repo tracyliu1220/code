@@ -9,7 +9,7 @@ vector<long long> a, S;
 void init() {
     cin >> n >> m;
     assert(1 <= n && n <= 200000);
-    assert(1 <= m && m <= 200000);
+    assert(1 <= m && m <= 20000);
     a.resize(2 * n);
     for (int i = 0; i < n; i++) {
         cin >> a[i];
