@@ -1,43 +1,38 @@
-#include <stdio.h>
-#include <string.h>
-
-#include <algorithm>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 
-#define MAXN 1000
-char G[MAXN][MAXN];
-int t[MAXN][MAXN];
-int dx[] = {1, -1, 0, 0}, dy[] = {0, 0, 1, -1};
-
 int main() {
-    int N;
-    scanf("%d", &N);
+    int n;
+    cin >> n;
+    vector<string> grid(n);
+    for (int i = 0; i < n; i++) cin >> grid[i];
 
-    for (int i = 0; i < N; i++) scanf("%s", &G[i]);
+    vector<vector<int>> dis(n, vector<int>(n, -1));
+    queue<pair<int, int>> que;
+    if (grid[1][1] != '#') {
+        dis[1][1] = 1;
+        que.push({1, 1});
+    }
+    while (que.size()) {
+        pair<int, int> u = que.front();
+        que.pop();
 
-    memset(t, -1, sizeof(t));
-    // BFS------------------------------------------------------------
-    queue<pair<int, int> > S;
-    S.push({1, 1});
-    G[1][1] = '#';
-    t[1][1] = 1;
-
-    while (!S.empty()) {
-        pair<int, int> w = S.front();
-        S.pop();
-        int x = w.first, y = w.second;
+        const int dx[] = {0, 1, 0, -1};
+        const int dy[] = {1, 0, -1, 0};
         for (int i = 0; i < 4; i++) {
-            if (G[x + dx[i]][y + dy[i]] == '.') {
-                S.push({x + dx[i], y + dy[i]});
-                t[x + dx[i]][y + dy[i]] = t[x][y] + 1;
-                G[x + dx[i]][y + dy[i]] = '#';
-            }
+            int nx = u.first + dx[i];
+            int ny = u.second + dy[i];
+            if (nx < 0 || nx >= n) continue;
+            if (ny < 0 || ny >= n) continue;
+            if (grid[nx][ny] == '#') continue;
+            if (dis[nx][ny] != -1) continue;
+            dis[nx][ny] = dis[u.first][u.second] + 1;
+            que.push({nx, ny});
         }
     }
-    // output---------------------------------------------------------
-    if (t[N - 2][N - 2] == -1)
-        printf("No solution!");
-    else
-        printf("%d\n", t[N - 2][N - 2]);
+    if (dis[n - 2][n - 2] == -1) {
+        cout << "No solution!" << '\n';
+    } else {
+        cout << dis[n - 2][n - 2] << '\n';
+    }
 }
