@@ -30,6 +30,7 @@ int main() {
         vector<LL> dis_tmp = dis;
         BellmanFord(0, dis, edges);
         if (dis != dis_tmp)
+
             cout << "possible\n";
         else
             cout << "not possible\n";
