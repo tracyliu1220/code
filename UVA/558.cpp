@@ -1,50 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long LL;
+const LL INF = 0x3f3f3f3f3f3f3f3f;
 
-const int INF = 0x3f3f3f3f;
+struct Edge { int u, v; LL w; };
 
-struct Edge {
-    int u, v, w;
-};
-
-
-bool relax(Edge e, vector<int> & dis) {
-  if (dis[e.u] + e.w < dis[e.v]) {
-      dis[e.v] = dis[e.u] + e.w;
-      return true;
-  }
-  return false;
+void relax(Edge &e, vector<LL> &dis) {
+    dis[e.v] = min(dis[e.v], dis[e.u] + e.w);
 }
-
-
-bool BellmanFord(int n, vector<Edge> & edges, vector<int> & dis) {
-  dis[0] = 0;
-  for (int i = 0; i < n - 1; i++) {
-	for (int j = 0; j < edges.size(); j++) {
-      Edge e = edges[j];
-	  relax(e, dis);
-    }
-  }
-  bool flag = false;
-  for (int j = 0; j < edges.size(); j++) {
-      Edge e = edges[j];
-      flag |= relax(e, dis);
-  }
-  return flag;
+void BellmanFord(int s, vector<LL> &dis, vector<Edge> &edges) {
+    int n = dis.size();
+    int m = edges.size();
+    for (int i = 0; i < n - 1; i++)
+        for (int j = 0; j < m; j++)
+            relax(edges[j], dis);
 }
-
-
 int main() {
-    int T; cin >> T; while (T--) {
+    ios_base::sync_with_stdio(false); cin.tie(0);
+    int t; cin >> t; while (t--) {
         int n, m; cin >> n >> m;
-        vector<Edge> edges(m);
-        vector<int> dis(n, INF);
-        
+        vector<Edge> edges;
         for (int i = 0; i < m; i++) {
-            cin >> edges[i].u >> edges[i].v >> edges[i].w;
+            int u, v; LL w; cin >> u >> v >> w;
+            edges.push_back({u, v, w});
         }
+        
+        vector<LL> dis(n, INF);
+        BellmanFord(0, dis, edges);
+        vector<LL> dis_tmp = dis;
+        BellmanFord(0, dis, edges);
+        if (dis != dis_tmp)
 
-        if (BellmanFord(n, edges, dis))
             cout << "possible\n";
         else
             cout << "not possible\n";
